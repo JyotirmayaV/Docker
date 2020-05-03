@@ -1,1 +1,32 @@
-vers
+version : '3.1'
+
+services:
+  mysql:
+    image:mysql:5.7
+    volumes:
+      -mysql_storage:/var/lib/mysql
+    restart:always
+    environment:
+      MYSQL_ROOT_PASSWORD:rootpass
+      MYSQL_USER:jyotirmaya
+      MYSQL_PASSWORD:redhat
+      MYSQL_DATABASE:mydb
+
+  joomla:
+    image:joomla:3.9-php7.2-apache
+    restart:always
+    depends_on:
+      -mysql
+    ports:
+      -80:80
+    environment:
+      JOOMLA_DB_HOST:mysql:3306
+      JOOMLA_DB_USER:jyotirmaya
+      JOOMLA_DB_PASWORD:redhat
+      JOOMLA_DB_NAME:mydb
+    volumes:
+      -joomla_storage:/var/www/html
+
+volumes:
+  mysql_storage:
+  joomla_storage:
