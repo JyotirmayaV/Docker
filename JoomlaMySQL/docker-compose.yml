@@ -25,7 +25,7 @@ services:
       JOOMLA_DB_PASWORD:redhat
       JOOMLA_DB_NAME:mydb
     volumes:
-      -joomla_storage:/var/www/html
+      -joomla_storage:/var/www/htm
 
 volumes:
   mysql_storage:
